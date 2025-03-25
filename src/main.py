@@ -66,10 +66,11 @@ def upload(file, des):
         agent.update_files(file, des)
 
 @cli.command()
-@click.option('--command', '-c', help='Command to run')
+@click.option('--command', '-c', multiple=True, help='Command to run')
 def run(command):
     with HostAgent() as agent:
-        agent.run_command(command)
+        cmd = '; '.join(command)
+        agent.run_command(cmd)
 
 if __name__ == '__main__':
     cli()
